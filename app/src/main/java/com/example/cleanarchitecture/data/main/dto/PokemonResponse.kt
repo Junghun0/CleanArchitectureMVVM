@@ -12,4 +12,7 @@ data class PokemonResponse(
     @SerializedName("next") val next: String?,
     @SerializedName("previous") val previous: String?,
     @SerializedName("results") val results: List<Pokemon>
+
+    //test1 push
+
 )
