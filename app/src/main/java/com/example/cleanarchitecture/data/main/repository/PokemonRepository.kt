@@ -7,7 +7,7 @@ interface PokemonRepository {
     suspend fun pokemonList(
         limit: Int,
         offset: Int
-    ): List<PokemonResponse>
+    ): PokemonResponse
 
     suspend fun pokemonInfo(
         name: String

@@ -9,7 +9,7 @@ import javax.inject.Inject
 class PokemonRepositoryImpl @Inject constructor(
     private val pokemonService: PokemonService
 ): PokemonRepository {
-    override suspend fun pokemonList(limit: Int, offset: Int): List<PokemonResponse> {
+    override suspend fun pokemonList(limit: Int, offset: Int): PokemonResponse {
         return pokemonService.fetchPokemonList(limit, offset)
     }
 
