@@ -1,40 +1,36 @@
 package com.example.cleanarchitecture.presenter.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.example.cleanarchitecture.R
+import com.example.cleanarchitecture.common.BaseActivity
 import com.example.cleanarchitecture.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>({
+    ActivityMainBinding.inflate(it)
+}) {
     private val mainViewModel by viewModels<MainViewModel>()
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         binding.viewModel = mainViewModel
-
-        mainViewModel.fetchPokemonList(20, 10)
-        mainViewModel.fetchPokemonInfo("butterfree")
+        adapter = MainAdapter()
+        binding.mainRecyclerView.adapter = adapter
         observeData()
     }
 
     private fun observeData() {
         mainViewModel.pokemonList.observe(this, Observer {
-            Log.d("jhjh"," list- >?> ${it}")
+            adapter.submitList(it)
+            Log.d("jhjh", " list- >?> ${it}")
         })
 
         mainViewModel.pokemonInfo.observe(this, {
-            Log.d("jhjh"," info ->>> $it")
+            Log.d("jhjh", " info ->>> $it")
         })
     }
 }

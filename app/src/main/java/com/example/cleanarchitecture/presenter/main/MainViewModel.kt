@@ -19,6 +19,10 @@ class MainViewModel @Inject constructor(
     private val pokemonInfoUseCase: PokemonInfoUseCase
 ): BaseViewModel(){
 
+    init {
+        fetchPokemonList(20, 10)
+    }
+
     private val _pokemonList = MutableLiveData<List<Pokemon>>()
     val pokemonList: LiveData<List<Pokemon>>
         get() = _pokemonList
