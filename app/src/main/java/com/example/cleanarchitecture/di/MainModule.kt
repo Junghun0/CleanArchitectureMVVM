@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class NetworkModule {
+abstract class MainModule {
 
     @Binds
     @ViewModelScoped

@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.domain.main
 
-import com.example.cleanarchitecture.data.main.dto.PokemonInfo
 import com.example.cleanarchitecture.data.main.dto.PokemonResponse
 import com.example.cleanarchitecture.data.main.repository.PokemonRepository
 import javax.inject.Inject

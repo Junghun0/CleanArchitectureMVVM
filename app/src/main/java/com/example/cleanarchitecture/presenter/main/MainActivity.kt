@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.example.cleanarchitecture.common.BaseActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.cleanarchitecture.domain.base.BaseActivity
 import com.example.cleanarchitecture.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>({
@@ -21,11 +24,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>({
         adapter = MainAdapter()
         binding.mainRecyclerView.adapter = adapter
         observeData()
+
+        lifecycleScope.launch {
+            mainViewModel.pagingPokemonList().collectLatest {
+                adapter.submitData(it)
+            }
+        }
     }
 
     private fun observeData() {
         mainViewModel.pokemonList.observe(this, Observer {
-            adapter.submitList(it)
             Log.d("jhjh", " list- >?> ${it}")
         })
 

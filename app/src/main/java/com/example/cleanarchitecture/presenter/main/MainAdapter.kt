@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.data.main.dto.Pokemon
 import com.example.cleanarchitecture.databinding.ItemLayoutBinding
 
-class MainAdapter : ListAdapter<Pokemon, MainAdapter.MainViewHolder>(diffUtil) {
+class MainAdapter : PagingDataAdapter<Pokemon, MainAdapter.MainViewHolder>(diffUtil) {
 
     inner class MainViewHolder constructor(
         private val binding: ItemLayoutBinding
@@ -40,7 +41,10 @@ class MainAdapter : ListAdapter<Pokemon, MainAdapter.MainViewHolder>(diffUtil) {
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        item?.let {
+            holder.bind(it)
+        }
     }
 
     companion object {

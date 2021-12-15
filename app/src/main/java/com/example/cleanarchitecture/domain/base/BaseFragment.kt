@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.common
+package com.example.cleanarchitecture.domain.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
