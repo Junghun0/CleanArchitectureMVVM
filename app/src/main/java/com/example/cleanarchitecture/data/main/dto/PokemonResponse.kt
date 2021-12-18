@@ -7,18 +7,8 @@ import kotlinx.serialization.Serializable
 @Keep
 @Serializable
 data class PokemonResponse(
-    // need rebase
     @SerializedName("count") val count: Int,
     @SerializedName("next") val next: String?,
     @SerializedName("previous") val previous: String?,
     @SerializedName("results") val results: List<Pokemon>
-
-    //test1 push
-
-    //test2 push
-
-    //test3 push
-
-
-
 )

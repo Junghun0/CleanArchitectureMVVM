@@ -1,12 +1,15 @@
 package com.example.cleanarchitecture.presenter.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.cleanarchitecture.domain.base.BaseActivity
 import com.example.cleanarchitecture.databinding.ActivityMainBinding
+import com.example.cleanarchitecture.presenter.info.InfoActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -22,6 +25,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>({
         super.onCreate(savedInstanceState)
         binding.viewModel = mainViewModel
         adapter = MainAdapter()
+        adapter.onItemClick = { pokemon ->
+            val intent = Intent(this, InfoActivity::class.java).apply {
+                putExtra("name", pokemon.name)
+                putExtra("url", pokemon.getImageUrl())
+            }
+            startActivity(intent)
+        }
         binding.mainRecyclerView.adapter = adapter
         observeData()
 
@@ -35,10 +45,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>({
     private fun observeData() {
         mainViewModel.pokemonList.observe(this, Observer {
             Log.d("jhjh", " list- >?> ${it}")
-        })
-
-        mainViewModel.pokemonInfo.observe(this, {
-            Log.d("jhjh", " info ->>> $it")
         })
     }
 }

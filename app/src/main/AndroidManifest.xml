@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cleanarchitecture">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".PokemonApplication"
@@ -12,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CleanArchitecture">
+        <activity
+            android:name=".presenter.info.InfoActivity"
+            android:exported="true" />
         <activity
             android:name=".presenter.main.MainActivity"
             android:exported="true">

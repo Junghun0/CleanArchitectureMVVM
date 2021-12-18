@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.data.main.dto
 
-import android.os.Parcelable
 import androidx.annotation.Keep
 import kotlinx.serialization.Serializable
 import com.google.gson.annotations.SerializedName
