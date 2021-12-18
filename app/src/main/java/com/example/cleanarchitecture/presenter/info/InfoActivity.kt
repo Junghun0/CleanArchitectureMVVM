@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import com.example.cleanarchitecture.common.StatusBarUtil
+import com.example.cleanarchitecture.data.main.dto.Pokemon
 import com.example.cleanarchitecture.databinding.ActivityInfoBinding
 import com.example.cleanarchitecture.domain.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,11 +19,11 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>({
         super.onCreate(savedInstanceState)
         StatusBarUtil.setStatusBarColor(this, StatusBarUtil.StatusBarColorType.BLACK_STATUS_BAR)
 
-        val pokemonName = intent.getStringExtra("name")
-        val imageUrl = intent.getStringExtra("url")
+        val pokemon = intent.getParcelableExtra<Pokemon>("pokemon")
 
-        pokemonName?.let {
-            infoViewModel.fetchPokemonInfo(pokemonName)
+        pokemon?.let {
+            binding.pokemon = it
+            infoViewModel.fetchPokemonInfo(it.name)
         }
 
         observeData()
@@ -31,6 +32,7 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>({
     private fun observeData() {
         infoViewModel.pokemonInfo.observe(this, {
             Log.e("jhjh"," info data -> $it")
+            binding.pokemonInfo = it
         })
     }
 }

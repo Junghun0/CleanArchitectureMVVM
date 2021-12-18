@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.example.cleanarchitecture.common.StatusBarUtil
 import com.example.cleanarchitecture.domain.base.BaseActivity
 import com.example.cleanarchitecture.databinding.ActivityMainBinding
 import com.example.cleanarchitecture.presenter.info.InfoActivity
@@ -23,14 +24,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>({
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        StatusBarUtil.setStatusBarColor(this, StatusBarUtil.StatusBarColorType.BLACK_STATUS_BAR)
+
         binding.viewModel = mainViewModel
         adapter = MainAdapter()
         adapter.onItemClick = { pokemon ->
-            val intent = Intent(this, InfoActivity::class.java).apply {
-                putExtra("name", pokemon.name)
-                putExtra("url", pokemon.getImageUrl())
+            Intent(this, InfoActivity::class.java).apply {
+                putExtra(POKEMON, pokemon)
+            }.run {
+                startActivity(this)
             }
-            startActivity(intent)
         }
         binding.mainRecyclerView.adapter = adapter
         observeData()
@@ -46,5 +49,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>({
         mainViewModel.pokemonList.observe(this, Observer {
             Log.d("jhjh", " list- >?> ${it}")
         })
+    }
+
+    companion object {
+        const val POKEMON = "pokemon"
     }
 }
