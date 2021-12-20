@@ -2,6 +2,8 @@ package com.example.cleanarchitecture.presenter.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +14,7 @@ import com.example.cleanarchitecture.databinding.ItemLayoutBinding
 
 class MainAdapter : PagingDataAdapter<Pokemon, MainAdapter.MainViewHolder>(diffUtil) {
 
-    var onItemClick: ((Pokemon) -> Unit)? = null
+    var onItemClick: ((Pokemon, ImageView) -> Unit)? = null
 
     inner class MainViewHolder constructor(
         private val binding: ItemLayoutBinding
@@ -20,10 +22,11 @@ class MainAdapter : PagingDataAdapter<Pokemon, MainAdapter.MainViewHolder>(diffU
         init {
             binding.root.setOnClickListener {
                 getItem(absoluteAdapterPosition)?.let {
-                    onItemClick?.invoke(it)
+                    onItemClick?.invoke(it, binding.image)
                 }
             }
         }
+
         fun bind(item: Pokemon) {
             binding.pokemon = item
             binding.executePendingBindings()

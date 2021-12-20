@@ -3,8 +3,11 @@ package com.example.cleanarchitecture.presenter.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.os.bundleOf
+import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.cleanarchitecture.common.StatusBarUtil
@@ -28,11 +31,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>({
 
         binding.viewModel = mainViewModel
         adapter = MainAdapter()
-        adapter.onItemClick = { pokemon ->
+        adapter.onItemClick = { pokemon, container ->
             Intent(this, InfoActivity::class.java).apply {
                 putExtra(POKEMON, pokemon)
             }.run {
-                startActivity(this)
+                val pair = Pair(container as View, container.transitionName)
+                val optionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, pair)
+                startActivity(this, optionsCompat.toBundle())
             }
         }
         binding.mainRecyclerView.adapter = adapter

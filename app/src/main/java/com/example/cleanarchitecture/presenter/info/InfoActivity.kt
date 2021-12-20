@@ -1,9 +1,10 @@
 package com.example.cleanarchitecture.presenter.info
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.example.cleanarchitecture.common.StatusBarUtil
+import com.example.cleanarchitecture.common.TypeColorUtil
 import com.example.cleanarchitecture.data.main.dto.Pokemon
 import com.example.cleanarchitecture.databinding.ActivityInfoBinding
 import com.example.cleanarchitecture.domain.base.BaseActivity
@@ -17,6 +18,7 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>({
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportPostponeEnterTransition()
         StatusBarUtil.setStatusBarColor(this, StatusBarUtil.StatusBarColorType.BLACK_STATUS_BAR)
 
         val pokemon = intent.getParcelableExtra<Pokemon>("pokemon")
@@ -31,8 +33,18 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>({
 
     private fun observeData() {
         infoViewModel.pokemonInfo.observe(this, {
-            Log.e("jhjh"," info data -> $it")
             binding.pokemonInfo = it
+            binding.infoBackground.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    TypeColorUtil.getTypeColor(it.types[0].type.name)
+                )
+            )
+            supportStartPostponedEnterTransition()
         })
+    }
+
+    override fun onBackPressed() {
+        finishAfterTransition()
     }
 }
