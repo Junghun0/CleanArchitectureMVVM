@@ -27,4 +27,5 @@
     <color name="gray_21">#B1A5A5</color>
     <color name="info_background">#CCCCCC</color>
     <color name="info_textColor">#363636</color>
+    <color name="transparent">#00000000</color>
 </resources>

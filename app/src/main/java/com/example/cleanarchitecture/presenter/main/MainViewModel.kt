@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun pagingPokemonList(): Flow<PagingData<Pokemon>> {
-        return pokemonListPagingUseCase()
-    }
+    fun pagingPokemonList(): Flow<PagingData<Pokemon>> =
+        pokemonListPagingUseCase()
+
 }

@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class InfoViewModel @Inject constructor(
     private val pokemonInfoUseCase: PokemonInfoUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private val _pokemonInfo = MutableLiveData<PokemonInfo>()
     val pokemonInfo: LiveData<PokemonInfo>
@@ -21,8 +21,13 @@ class InfoViewModel @Inject constructor(
 
     fun fetchPokemonInfo(name: String) {
         viewModelScope.launch {
-            val info = pokemonInfoUseCase(PokemonInfoUseCase.Params(name))
-            _pokemonInfo.value = info
+            runCatching {
+                pokemonInfoUseCase(PokemonInfoUseCase.Params(name))
+            }.onSuccess {
+                _pokemonInfo.value = it
+            }.onFailure {
+
+            }
         }
     }
 }

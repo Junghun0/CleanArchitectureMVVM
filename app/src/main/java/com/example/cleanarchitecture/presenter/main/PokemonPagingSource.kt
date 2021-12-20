@@ -12,7 +12,7 @@ class PokemonPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         return try {
             val next = params.key ?: 0
-            val offset = if (next == 0) 0 else next+20
+            val offset = if (next == 0) 0 else next + 20
             val list = pokemonListUseCase(PokemonListUseCase.Params(20, offset))
             LoadResult.Page(
                 data = list.results,
@@ -22,7 +22,6 @@ class PokemonPagingSource @Inject constructor(
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
-
     }
 
     override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {

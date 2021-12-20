@@ -11,6 +11,7 @@ import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.cleanarchitecture.common.StatusBarUtil
+import com.example.cleanarchitecture.common.TypeColorUtil
 import com.example.cleanarchitecture.domain.base.BaseActivity
 import com.example.cleanarchitecture.databinding.ActivityMainBinding
 import com.example.cleanarchitecture.presenter.info.InfoActivity
@@ -27,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>({
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        StatusBarUtil.setStatusBarColor(this, StatusBarUtil.StatusBarColorType.BLACK_STATUS_BAR)
+        StatusBarUtil.setStatusBarColor(this, TypeColorUtil.getTypeColor("default"))
 
         binding.viewModel = mainViewModel
         adapter = MainAdapter()
@@ -42,19 +43,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>({
             }
         }
         binding.mainRecyclerView.adapter = adapter
-        observeData()
 
         lifecycleScope.launch {
             mainViewModel.pagingPokemonList().collectLatest {
                 adapter.submitData(it)
             }
         }
-    }
-
-    private fun observeData() {
-        mainViewModel.pokemonList.observe(this, Observer {
-            Log.d("jhjh", " list- >?> ${it}")
-        })
     }
 
     companion object {
