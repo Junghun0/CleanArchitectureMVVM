@@ -30,4 +30,18 @@ object InfoBindingAdapter {
         constraintLayout.setBackgroundColor(TypeColorUtil.getTypeColor(types.type.name))
     }
 
+    @BindingAdapter("setTall")
+    @JvmStatic
+    fun bindTallText(textView: TextView, tall: Int) {
+        val builder = StringBuilder()
+        textView.text = builder.append(tall).append("m").toString()
+    }
+
+    @BindingAdapter("setWeight")
+    @JvmStatic
+    fun bindWeightText(textView: TextView, weight: Int) {
+        val builder = StringBuilder()
+        textView.text = builder.append(weight).append("kg").toString()
+    }
+
 }

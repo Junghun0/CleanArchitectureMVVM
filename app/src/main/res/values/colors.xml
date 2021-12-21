@@ -28,4 +28,5 @@
     <color name="info_background">#CCCCCC</color>
     <color name="info_textColor">#363636</color>
     <color name="transparent">#00000000</color>
+    <color name="info_divider">#898989</color>
 </resources>
