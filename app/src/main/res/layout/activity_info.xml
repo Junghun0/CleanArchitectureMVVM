@@ -18,6 +18,11 @@
         <variable
             name="pokemonInfo"
             type="com.example.cleanarchitecture.data.main.dto.PokemonInfo" />
+
+        <variable
+            name="exp"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,7 +102,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="@+id/header"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            app:layout_constraintTop_toBottomOf="@+id/exp_textview"
             app:setWeight="@{pokemonInfo.weight}" />
 
 
@@ -120,7 +125,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@+id/header"
             app:layout_constraintStart_toStartOf="@+id/header"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView">
+            app:layout_constraintTop_toBottomOf="@+id/exp_textview">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/type_1"
@@ -155,7 +160,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/header"
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            app:layout_constraintTop_toBottomOf="@+id/exp_textview"
             app:setTall="@{pokemonInfo.height}" />
 
         <TextView
@@ -168,6 +173,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tall_textview" />
 
         <View
+            android:id="@+id/view"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginStart="16dp"
@@ -177,6 +183,31 @@
             app:layout_constraintEnd_toEndOf="@+id/header"
             app:layout_constraintStart_toStartOf="@+id/header"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <ProgressBar
+            android:id="@+id/progress_exp"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:max="100"
+            android:progressDrawable="@drawable/info_progress"
+            app:setExpProgress="@{exp}"
+            app:layout_constraintEnd_toEndOf="@+id/header"
+            app:layout_constraintStart_toStartOf="@+id/header"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+        <TextView
+            android:id="@+id/exp_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            app:setExp="@{exp}"
+            app:layout_constraintEnd_toEndOf="@+id/progress_exp"
+            app:layout_constraintStart_toStartOf="@+id/progress_exp"
+            app:layout_constraintTop_toBottomOf="@+id/progress_exp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

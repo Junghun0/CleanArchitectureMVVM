@@ -13,12 +13,21 @@ import com.example.cleanarchitecture.data.main.dto.TypeResponse
 import com.example.cleanarchitecture.databinding.ActivityInfoBinding
 import com.example.cleanarchitecture.domain.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
+import android.view.animation.LinearInterpolator
+
+import android.animation.ObjectAnimator
+
+
+
 
 @AndroidEntryPoint
 class InfoActivity : BaseActivity<ActivityInfoBinding>({
     ActivityInfoBinding.inflate(it)
 }) {
     private val infoViewModel by viewModels<InfoViewModel>()
+    private val exp by lazy {
+        (1..100).random().toString()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +37,12 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>({
             binding.pokemon = it
             infoViewModel.fetchPokemonInfo(it.name)
         }
+
+        binding.exp = exp
+        val progressAnimator = ObjectAnimator.ofInt(binding.progressExp, "progress", 0, exp.toInt())
+        progressAnimator.duration = 1500
+        progressAnimator.interpolator = LinearInterpolator()
+        progressAnimator.start()
         observeData()
     }
 

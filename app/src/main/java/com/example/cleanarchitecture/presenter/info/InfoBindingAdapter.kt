@@ -1,5 +1,6 @@
 package com.example.cleanarchitecture.presenter.info
 
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -42,6 +43,19 @@ object InfoBindingAdapter {
     fun bindWeightText(textView: TextView, weight: Int) {
         val builder = StringBuilder()
         textView.text = builder.append(weight).append("kg").toString()
+    }
+
+    @BindingAdapter("setExp")
+    @JvmStatic
+    fun bindExpText(textView: TextView, exp: String) {
+        val builder = StringBuilder()
+        textView.text = builder.append("EXP ").append(exp).append("/").append("100").toString()
+    }
+
+    @BindingAdapter("setExpProgress")
+    @JvmStatic
+    fun bindExpProgress(progressBar: ProgressBar, exp: String) {
+        progressBar.progress = exp.toInt()
     }
 
 }
