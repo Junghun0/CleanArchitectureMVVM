@@ -46,7 +46,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="180dp"
             android:layout_marginEnd="18dp"
@@ -107,9 +107,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:gravity="center"
-            android:textStyle="bold"
             android:textColor="@color/info_textColor"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="@+id/header"
             app:layout_constraintTop_toBottomOf="@+id/exp_textview"
@@ -204,21 +204,21 @@
             android:layout_marginEnd="40dp"
             android:max="100"
             android:progressDrawable="@drawable/info_progress"
-            app:setExpProgress="@{exp}"
             app:animator="@{exp}"
             app:layout_constraintEnd_toEndOf="@+id/header"
             app:layout_constraintStart_toStartOf="@+id/header"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            app:setExpProgress="@{exp}" />
 
         <TextView
             android:id="@+id/exp_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
-            app:setExp="@{exp}"
             app:layout_constraintEnd_toEndOf="@+id/progress_exp"
             app:layout_constraintStart_toStartOf="@+id/progress_exp"
-            app:layout_constraintTop_toBottomOf="@+id/progress_exp" />
+            app:layout_constraintTop_toBottomOf="@+id/progress_exp"
+            app:setExp="@{exp}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
