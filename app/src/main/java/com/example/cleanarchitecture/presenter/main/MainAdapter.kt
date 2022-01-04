@@ -1,5 +1,6 @@
 package com.example.cleanarchitecture.presenter.main
 
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,14 +16,19 @@ import com.example.cleanarchitecture.databinding.ItemLayoutBinding
 class MainAdapter : PagingDataAdapter<Pokemon, MainAdapter.MainViewHolder>(diffUtil) {
 
     var onItemClick: ((Pokemon, ImageView) -> Unit)? = null
+    private var onClickedAt = 0L
 
     inner class MainViewHolder constructor(
         private val binding: ItemLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
-                getItem(absoluteAdapterPosition)?.let {
-                    onItemClick?.invoke(it, binding.image)
+                val currentClickedAt = SystemClock.elapsedRealtime()
+                if (currentClickedAt - onClickedAt > 700) {
+                    getItem(absoluteAdapterPosition)?.let {
+                        onItemClick?.invoke(it, binding.image)
+                    }
+                    onClickedAt = currentClickedAt
                 }
             }
         }
