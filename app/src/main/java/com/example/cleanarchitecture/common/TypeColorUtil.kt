@@ -6,6 +6,7 @@ import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.data.main.dto.TypeResponse
 
 object TypeColorUtil {
+
     fun getTypeColor(type: String): Int {
         return when (type) {
             "fighting" -> R.color.fighting

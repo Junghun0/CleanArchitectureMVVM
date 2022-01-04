@@ -4,10 +4,6 @@ import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import android.os.Build
 import android.app.Activity
-import android.content.Context
-import com.example.cleanarchitecture.R
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 
 object StatusBarUtil {
     @SuppressLint("ObsoleteSdkInt")

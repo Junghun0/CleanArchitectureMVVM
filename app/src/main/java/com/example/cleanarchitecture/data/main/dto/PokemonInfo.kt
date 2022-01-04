@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.annotation.Keep
 import kotlinx.serialization.Serializable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Keep
 @Serializable

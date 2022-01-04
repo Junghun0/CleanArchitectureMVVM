@@ -4,13 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.example.cleanarchitecture.data.main.dto.Pokemon
-import com.example.cleanarchitecture.data.main.dto.PokemonInfo
-import com.example.cleanarchitecture.data.main.dto.PokemonResponse
 import com.example.cleanarchitecture.domain.main.PokemonListUseCase
 import com.example.cleanarchitecture.domain.base.BaseViewModel
-import com.example.cleanarchitecture.domain.info.PokemonInfoUseCase
 import com.example.cleanarchitecture.domain.main.PokemonListPagingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
