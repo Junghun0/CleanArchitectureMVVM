@@ -1,7 +1,11 @@
 package com.example.cleanarchitecture.presenter.info
 
+import android.animation.ObjectAnimator
+import android.view.View
+import android.view.animation.LinearInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.OnBackPressedDispatcherOwner
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.example.cleanarchitecture.common.TypeColorUtil
@@ -56,6 +60,27 @@ object InfoBindingAdapter {
     @JvmStatic
     fun bindExpProgress(progressBar: ProgressBar, exp: String) {
         progressBar.progress = exp.toInt()
+    }
+
+    @JvmStatic
+    @BindingAdapter("onBackPressed")
+    fun bindOnBackPressed(view: View, onBackPress: Boolean) {
+        val context = view.context
+        if (onBackPress && context is OnBackPressedDispatcherOwner) {
+            view.setOnClickListener {
+                context.onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    }
+
+
+    @JvmStatic
+    @BindingAdapter("animator")
+    fun bindAnimation(progressBar: ProgressBar, exp: String) {
+        val progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, exp.toInt())
+        progressAnimator.duration = 1500
+        progressAnimator.interpolator = LinearInterpolator()
+        progressAnimator.start()
     }
 
 }

@@ -2,10 +2,8 @@ package com.example.cleanarchitecture.presenter.info
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.common.StatusBarUtil
 import com.example.cleanarchitecture.common.TypeColorUtil
 import com.example.cleanarchitecture.data.main.dto.Pokemon
@@ -13,12 +11,6 @@ import com.example.cleanarchitecture.data.main.dto.TypeResponse
 import com.example.cleanarchitecture.databinding.ActivityInfoBinding
 import com.example.cleanarchitecture.domain.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
-import android.view.animation.LinearInterpolator
-
-import android.animation.ObjectAnimator
-
-
-
 
 @AndroidEntryPoint
 class InfoActivity : BaseActivity<ActivityInfoBinding>({
@@ -31,6 +23,7 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>({
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         supportPostponeEnterTransition()
 
         intent.getParcelableExtra<Pokemon>(POKEMON)?.let {
@@ -39,17 +32,12 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>({
         }
 
         binding.exp = exp
-        val progressAnimator = ObjectAnimator.ofInt(binding.progressExp, "progress", 0, exp.toInt())
-        progressAnimator.duration = 1500
-        progressAnimator.interpolator = LinearInterpolator()
-        progressAnimator.start()
         observeData()
     }
 
     private fun observeData() {
         infoViewModel.pokemonInfo.observe(this, {
             binding.pokemonInfo = it
-            //PokemonInfo(id=4, name=charmander, height=6, weight=85, experience=62, types=[TypeResponse(slot=1, type=Type(name=fire))])
             setChipData(it.types)
             val colorId = TypeColorUtil.getTypeColor(it.types[0].type.name)
 

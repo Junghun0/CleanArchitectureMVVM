@@ -91,6 +91,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:setId="@{pokemonInfo.id}" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onBackPressed="@{true}" />
+
         <TextView
             android:id="@+id/weight_textview"
             android:layout_width="wrap_content"
@@ -195,6 +205,7 @@
             android:max="100"
             android:progressDrawable="@drawable/info_progress"
             app:setExpProgress="@{exp}"
+            app:animator="@{exp}"
             app:layout_constraintEnd_toEndOf="@+id/header"
             app:layout_constraintStart_toStartOf="@+id/header"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
