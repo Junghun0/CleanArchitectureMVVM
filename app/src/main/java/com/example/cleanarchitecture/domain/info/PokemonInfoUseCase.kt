@@ -2,6 +2,7 @@ package com.example.cleanarchitecture.domain.info
 
 import com.example.cleanarchitecture.data.main.dto.PokemonInfo
 import com.example.cleanarchitecture.data.main.repository.PokemonRepository
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class PokemonInfoUseCase @Inject constructor(

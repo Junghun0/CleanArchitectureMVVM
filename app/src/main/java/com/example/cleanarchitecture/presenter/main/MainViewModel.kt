@@ -20,17 +20,12 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val pokemonListUseCase: PokemonListUseCase,
-    private val pokemonInfoUseCase: PokemonInfoUseCase,
     private val pokemonListPagingUseCase: PokemonListPagingUseCase
 ): BaseViewModel(){
 
     private val _pokemonList = MutableLiveData<List<Pokemon>>()
     val pokemonList: LiveData<List<Pokemon>>
         get() = _pokemonList
-
-    private val _pokemonInfo = MutableLiveData<PokemonInfo>()
-    val pokemonInfo: LiveData<PokemonInfo>
-        get() = _pokemonInfo
 
     fun fetchPokemonList(limit: Int, offset: Int) {
         viewModelScope.launch {
@@ -39,14 +34,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun fetchPokemonInfo(name: String) {
-        viewModelScope.launch {
-            val info = pokemonInfoUseCase(PokemonInfoUseCase.Params(name))
-            _pokemonInfo.value = info
-        }
-    }
+    fun pagingPokemonList(): Flow<PagingData<Pokemon>> =
+        pokemonListPagingUseCase()
 
-    fun pagingPokemonList(): Flow<PagingData<Pokemon>> {
-        return pokemonListPagingUseCase()
-    }
 }

@@ -13,8 +13,8 @@ object MainBindingAdapter {
     fun bindImage(imageView: ImageView, url: String) {
         Glide.with(imageView.context)
             .load(url)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .apply(RequestOptions().fitCenter())
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(imageView)
     }
 }
